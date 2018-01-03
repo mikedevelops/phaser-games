@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "test": "jest",
-    "prod": "webpack -p"
+    "prod": "webpack -p",
+    "start": "node server/index.js",
+    "build:phaser": "cd node_modules/phaser && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,7 @@
     "@types/jest": "^21.1.8",
     "@types/webpack": "^3.8.1",
     "awesome-typescript-loader": "^3.4.1",
+    "express": "^4.16.2",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.1",
     "source-map-loader": "^0.2.3",
@@ -22,6 +25,7 @@
     "tslint": "^5.8.0",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
+    "webpack-dev-middleware": "^2.0.3",
     "webpack-dev-server": "^2.9.7"
   },
   "jest": {
@@ -37,5 +41,8 @@
       "json",
       "node"
     ]
+  },
+  "dependencies": {
+    "phaser": "^3.0.0-beta.14"
   }
 }

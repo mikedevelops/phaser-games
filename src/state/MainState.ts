@@ -1,12 +1,15 @@
 import CurrencyService from '../services/CurrencyService';
 import Ticker from '../objects/Ticker';
+import Wallet from '../objects/Wallet';
 
 export default class MainState extends Phaser.State {
-    private tickers: Phaser.Group;
+    private tickerGroup: Phaser.Group;
+    private walletGroup: Phaser.Group;
 
     constructor (
         private tradeCurrency: string,
-        private currencies: CurrencyService[]
+        private currencies: CurrencyService[],
+        private fontStyle: {}
     ) {
         super();
     }
@@ -15,19 +18,42 @@ export default class MainState extends Phaser.State {
         game: Phaser.Game
     ) {
         // Tickers
-        this.tickers = game.add.group();
+        this.tickerGroup = game.add.group();
         this.currencies.forEach((currency: CurrencyService, index: number) => {
-            const ticker: Ticker = new Ticker(game, 0, 20 * index, currency, this.tradeCurrency);
-
-            this.tickers.add(ticker);
+            this.tickerGroup.add(
+                new Ticker(
+                    game,
+                    0,
+                    20 * index,
+                    currency,
+                    this.tradeCurrency,
+                    this.fontStyle
+                )
+            );
         });
-        this.tickers.x = 10;
-        this.tickers.y = 10;
+        this.tickerGroup.x = 10;
+        this.tickerGroup.y = 10;
+
+        // Wallet
+        this.walletGroup = game.add.group();
+        this.walletGroup.add(
+            new Wallet(
+                game,
+                0,
+                0,
+                10000,
+                'BROKER ACCOUNT',
+                this.tradeCurrency,
+                this.fontStyle
+            )
+        );
+        this.walletGroup.x = (game.width - this.walletGroup.width) - 10;
+        this.walletGroup.y = 10;
     }
 
     public update (
         game: Phaser.Game
     ) {
-        this.tickers.children.forEach((ticker: Ticker) => ticker.update);
+        this.tickerGroup.children.forEach((ticker: Ticker) => ticker.update);
     }
 }

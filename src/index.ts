@@ -13,6 +13,10 @@ import '../assets/fonts/Commodore.ttf';
 // constants
 const TRADE_INTERVAL = 1;
 const CURRENCY = '$';
+const FONT_STYLE = {
+    font: 'Commodore',
+    fontSize: 16
+};
 
 // Utilities
 const rnd = new Phaser.RandomDataGenerator();
@@ -37,7 +41,8 @@ const joshCoin: CurrencyService = new CurrencyService(
 // State
 const mainState = new MainState(
     CURRENCY,
-    [ mickCoin, joshCoin ]
+    [ mickCoin, joshCoin ],
+    FONT_STYLE
 );
 
 const bootState = new BootState(

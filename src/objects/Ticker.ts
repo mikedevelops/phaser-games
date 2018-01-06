@@ -7,13 +7,12 @@ export default class Ticker extends Phaser.Text {
         x: number,
         y: number,
         private currency: CurrencyService,
-        private tradeCurrency: string
+        private tradeCurrency: string,
+        private customFontStyle: {}
     ) {
-        super(game, x, y, '', {
-            fill: 'white',
-            font: 'Commodore',
-            fontSize: 16
-        });
+        super(game, x, y, '', Object.assign({}, customFontStyle, {
+            fill: 'white'
+        }));
 
         this.printCurrency();
     }
@@ -27,11 +26,9 @@ export default class Ticker extends Phaser.Text {
         const diff: number = this.currency.getDiff();
         const diffString: string = diff <= 0 ? `- ${(diff * -1).toFixed(2)}` : `+ ${diff.toFixed(2)}`;
 
-        this.setStyle({
-            fill: diff <= 0 ? 'red' : 'green',
-            font: 'Commodore',
-            fontSize: 16
-        });
+        this.setStyle(Object.assign({}, this.customFontStyle, {
+            fill: diff <= 0 ? 'red' : 'green'
+        }));
         this.text = `${this.currency.getCurrencyCode()}: ` +
             `${this.tradeCurrency}${this.currency.getPrice().toFixed(2)} | ${diffString}`;
     }

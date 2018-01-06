@@ -16,6 +16,16 @@ module.exports = {
                 use: 'awesome-typescript-loader',
                 exclude: /node_modules/
             },
+            {
+                test: /\.ttf$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]'
+                    }
+                },
+                exclude: /node_modules/,
+            },
             { test: /pixi\.js$/, loader: 'expose-loader?PIXI' },
             { test: /phaser-split\.js$/, loader: 'expose-loader?Phaser' },
             { test: /p2\.js$/, loader: 'expose-loader?p2' }

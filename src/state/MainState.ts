@@ -1,8 +1,10 @@
 import CurrencyService from '../services/CurrencyService';
 import Ticker from '../objects/Ticker';
 import Wallet from '../objects/Wallet';
+import Pane from '../objects/Pane';
 
 export default class MainState extends Phaser.State {
+    private tradeUI: Phaser.Group;
     private tickerGroup: Phaser.Group;
     private walletGroup: Phaser.Group;
 
@@ -49,6 +51,26 @@ export default class MainState extends Phaser.State {
         );
         this.walletGroup.x = (game.width - this.walletGroup.width) - 10;
         this.walletGroup.y = 10;
+
+        // Trading
+        this.tradeUI = game.add.group();
+        this.tradeUI.x = 10;
+        this.tradeUI.y = 100;
+
+        const tradeUITitle = new Phaser.Text(game, 0, 0, 'BROKER', this.fontStyle);
+        const tradeUIBuyLabel = new Phaser.Text(
+            game,
+            0,
+            20,
+            `"LET ME GET YOU IN AT 1 MSC @ ${this.tradeCurrency}${this.currencies[0].getPrice().toFixed(2)}"`,
+            this.fontStyle
+        );
+
+        this.tradeUI.add(tradeUITitle);
+        this.tradeUI.add(tradeUIBuyLabel);
+
+        // Pane debug
+        game.add.existing(new Pane(game, game.height / 3, game.width));
     }
 
     public update (

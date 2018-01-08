@@ -17,7 +17,7 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.ttf$/,
+                test: /\.(ttf|png|json)$/,
                 use: {
                     loader: 'file-loader',
                     options: {

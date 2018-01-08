@@ -1,7 +1,7 @@
 import 'phaser-ce';
 import TextPane from '../objects/TextPane';
-import '../../assets/sheets/pane/pane.png';
 import '../../assets/sheets/pane/pane.json';
+import '../../assets/sheets/pane/pane.png';
 import introductionSpeech from '../speech/introductionSpeech';
 
 export default class IntroState extends Phaser.State {

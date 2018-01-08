@@ -14,12 +14,18 @@ Todos
 
 8/1/2018
 
+- prototype item selection
+    - carousel
+        - arrow sprites and scale on input √
+
+9/1/2018
+
 - Prototype item selection
+    - carousel
+        - create catalogue JSON
+        - switch through items on input
     - create catalogue from data (including hair)
     - have locked (hidden) items
     - navigate through items on character
 
 ---
-
-
-

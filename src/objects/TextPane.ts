@@ -72,7 +72,7 @@ export default class TextPane extends Phaser.Sprite {
 
         // Input
         this.game.input.keyboard.onPressCallback = () => {
-            if (game.input.keyboard.pressEvent.charCode === Phaser.Keyboard.ENTER) {
+            if (game.input.keyboard.event.keyCode === Phaser.Keyboard.ENTER) {
                 this.speechService.next();
             }
         };

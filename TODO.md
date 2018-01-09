@@ -22,7 +22,7 @@ Todos
 
 - Prototype item selection
     - carousel
-        - create catalogue JSON
+        - create catalogue data
         - switch through items on input
     - create catalogue from data (including hair)
     - have locked (hidden) items

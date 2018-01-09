@@ -12,22 +12,19 @@ const sprites = {
     TOP_LEFT: 'pane 4.ase',
     BOTTOM_RIGHT: 'pane 5.ase',
     BOTTOM_LEFT: 'pane 6.ase',
-    TOP_RIGHT: 'pane 7.ase',
-    PROCEED: 'pane 8.ase'
+    TOP_RIGHT: 'pane 7.ase'
 };
 
 export default class TextPane extends Phaser.Sprite {
-    private speechService: SpeechService;
-    private speechTimer: number = 0;
-    private blinkTimer: number = 0;
-    private gameText: GameText;
+    protected paneWidth: number;
+    protected paneHeight: number;
+    protected gameText: GameText;
+    protected res: number;
     private pane: Pane;
-    private arrow: Phaser.Sprite;
 
     constructor (
         game: Phaser.Game,
-        speech: string[],
-        private speed: number = 50,
+        text: string = '',
         position: string = 'BOTTOM',
         width: number = (game.width / DEFAULT_RES),
         height: number = 5,
@@ -35,28 +32,21 @@ export default class TextPane extends Phaser.Sprite {
     ) {
         super(game, 0, 0, null);
 
-        // Pane
-        this.pane = new Pane(game, sprites, res, width, height);
+        this.paneWidth = width;
+        this.paneHeight = height;
+        this.res = res;
 
-        // Speech Service
-        this.speechService = new SpeechService(speech);
+        // Pane
+        this.pane = new Pane(game, sprites, this.res, this.paneWidth, this.paneHeight);
 
         // Text
-        this.gameText = new GameText(game, '', { fontSize: res / 2 });
+        this.gameText = new GameText(game, '', { fontSize: this.res / 2 });
         this.gameText.wordWrap = true;
         this.gameText.lineSpacing = 5;
-        this.gameText.y += res;
-        this.gameText.x += res;
-        this.gameText.wordWrapWidth = (width * res) - (res * 1.5);
-
-        // Arrow
-        this.arrow = new Phaser.Sprite(
-            game,
-            (width * res) - (res * 2),
-            (height * res) - (res * 2),
-            'pane',
-            sprites.PROCEED
-        );
+        this.gameText.y += this.res;
+        this.gameText.x += this.res;
+        this.gameText.wordWrapWidth = (this.paneWidth * this.res) - (this.res * 1.5);
+        this.gameText.text = text;
 
         // Position
         switch (position) {
@@ -66,40 +56,13 @@ export default class TextPane extends Phaser.Sprite {
         }
 
         // Attach
-        this.addChild(this.arrow);
         this.addChild(this.pane);
         this.addChild(this.gameText);
-
-        // Input
-        this.game.input.keyboard.onPressCallback = () => {
-            if (game.input.keyboard.event.keyCode === Phaser.Keyboard.ENTER) {
-                this.speechService.next();
-            }
-        };
     }
 
-    public update () {
-        // Speech type
-        if (this.speechTimer >= this.speed) {
-            this.updateText();
-            this.speechTimer = 0;
-        }
-
-        // Arrow blink
-        if (this.blinkTimer >= 500) {
-            this.arrow.visible = !this.arrow.visible;
-            this.blinkTimer = 0;
-        }
-
-        this.speechTimer += this.game.time.elapsedMS;
-        this.blinkTimer += this.game.time.elapsedMS;
-    }
-
-    private updateText (): void {
-        const text = this.speechService.getText();
-
-        if (text !== null) {
-            this.gameText.text = text;
-        }
+    public updateText (
+        text: string
+    ): void {
+        this.gameText.text = text;
     }
 }

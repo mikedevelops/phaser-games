@@ -1,5 +1,5 @@
 import 'phaser-ce';
-import TextPane from '../objects/TextPane';
+import SpeechPane from '../objects/SpeechPane';
 import '../../assets/sheets/pane/pane.json';
 import '../../assets/sheets/pane/pane.png';
 import introductionSpeech from '../speech/introductionSpeech';
@@ -14,6 +14,6 @@ export default class IntroState extends Phaser.State {
     public create (
         game: Phaser.Game
     ) {
-        game.add.existing(new TextPane(game, introductionSpeech, 25));
+        game.add.existing(new SpeechPane(game, introductionSpeech, 25));
     }
 }

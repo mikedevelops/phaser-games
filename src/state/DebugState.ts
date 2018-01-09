@@ -1,7 +1,9 @@
 import 'phaser-ce';
-
 import '../../assets/sheets/catalogue/catalogue.json';
 import '../../assets/sheets/catalogue/catalogue.png';
+import TextPane from '../objects/TextPane';
+import CatalogueService from '../services/CatalogueService';
+import introStoreCatalogue from '../data/catalogues/introCatalogue';
 
 const sprites = {
     ARROW: 'catalogue.ase'
@@ -12,6 +14,7 @@ export default class DebugState extends Phaser.State {
         game: Phaser.Game
     ) {
         game.load.atlas('catalogue', 'catalogue.png', 'catalogue.json');
+        game.load.atlas('pane', 'pane.png', 'pane.json');
     }
 
     public create (
@@ -45,18 +48,26 @@ export default class DebugState extends Phaser.State {
         carousel.y = game.world.centerY - leftArrow.height;
         carousel.x = game.world.centerX - (width / 2);
 
-        // add carousel
+        // catalogue
+        const catalogue = new CatalogueService(introStoreCatalogue);
+
+        // text pane
+        const textPane = new TextPane(game, catalogue.getActiveProduct().name);
+
+        // add object
         game.add.existing(carousel);
+        game.add.existing(textPane);
 
         // scale arrows up on keyDown
         game.input.keyboard.onDownCallback = () => {
             switch (game.input.keyboard.event.keyCode) {
                 case Phaser.Keyboard.LEFT:
                     leftArrow.scale.setTo(arrowScale);
+                    textPane.updateText(catalogue.getPrevItem().name);
                     break;
                 case Phaser.Keyboard.RIGHT:
-
                     rightArrow.scale.setTo(arrowScale);
+                    textPane.updateText(catalogue.getNextItem().name);
                     break;
             }
         };

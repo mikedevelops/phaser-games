@@ -5,7 +5,6 @@ export interface Product {
     description: string;
     sprite: string;
     locked: boolean;
-
 }
 
 export interface Catalogue {

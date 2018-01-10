@@ -22,10 +22,17 @@ Todos
 
 - Prototype item selection
     - carousel
-        - create catalogue data
-        - switch through items on input
-    - create catalogue from data (including hair)
+        - create catalogue data √
+        - switch through items on input √
+    - create catalogue from data (including hair) √
     - have locked (hidden) items
     - navigate through items on character
+
+10/1/2018
+
+- Prototype item selection
+    - print sprites and product info
+    - have locked (hidden) items
+    - buy action
 
 ---

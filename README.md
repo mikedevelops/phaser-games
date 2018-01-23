@@ -1,6 +1,6 @@
-# TypeScript Starter
+# Phaser TypeScript Starter
 
-A starting point for [TypeScript](https://www.typescriptlang.org) projects including [TSLint](https://github.com/palantir/tslint) and [ts-jest](https://github.com/kulshekhar/ts-jest).
+A starting point for [Phaser](https://phaser.io/) games written in [TypeScript](https://www.typescriptlang.org) including [TSLint](https://github.com/palantir/tslint) and [ts-jest](https://github.com/kulshekhar/ts-jest).
 
 ## Getting Started
 

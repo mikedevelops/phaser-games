@@ -77,7 +77,7 @@ export default class Carousel extends Phaser.Sprite {
         this.y = 0;
 
         // arrow positioning
-        const arrowPadding = 80;
+        const arrowPadding = 60;
 
         leftArrow.y = (this.background.height / 2) - (leftArrow.height / 2) + this.topPadding;
         leftArrow.x = (leftArrow.width / 2) + arrowPadding;

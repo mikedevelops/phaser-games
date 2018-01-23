@@ -36,8 +36,14 @@ Todos
 - Prototype item selection
     - product sprites √
     - have locked (hidden) items √
-    - factor Item Selector into a class, we need a base item selector
+    - factor Item Selector into a class, we need a base item selector √
         that will take a catalogue interface for navigating items.
         From this we can build a catalogue object for adding the desc pane.
 
----
+24/1/2018
+
+- User
+    - User wallet
+    - Spend method
+    - Earn method
+    - wallet UI

@@ -11,6 +11,7 @@ import TitleState from './state/TitleState';
 import IntroState from './state/IntroState';
 
 import '../assets/fonts/Commodore.ttf';
+import IntroStoreState from './state/IntroStoreState';
 
 // constants
 const TRADE_INTERVAL = 1;
@@ -47,9 +48,8 @@ const mainState = new MainState(
     [ mickCoin, joshCoin ],
     FONT_STYLE
 );
-
 const introState = new IntroState();
-
+const introStoreState = new IntroStoreState();
 const titleState = new TitleState(
     FONT_STYLE
 );
@@ -57,6 +57,7 @@ const titleState = new TitleState(
 const bootState = new BootState(
     titleState,
     introState,
+    introStoreState,
     mainState
 );
 

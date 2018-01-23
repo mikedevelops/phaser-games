@@ -13,8 +13,9 @@ const sprites = {
 };
 
 export default class Carousel extends Phaser.Sprite {
+    protected background: Phaser.Graphics;
+    protected  catalogue: CatalogueService;
     private item: Product;
-    private catalogue: CatalogueService;
 
     constructor (
         game: Phaser.Game,
@@ -43,7 +44,9 @@ export default class Carousel extends Phaser.Sprite {
         // arrows
         const leftArrow = new Phaser.Sprite(game, 0, 0, 'catalogue', sprites.ARROW);
         const rightArrow = new Phaser.Sprite(game, 0, 0, 'catalogue', sprites.ARROW);
-        const background = new Phaser.Graphics(game, 0, 0);
+
+        // background
+        this.background = new Phaser.Graphics(game, 0, 0);
 
         // create left arrow from right arrow sprite
         leftArrow.rotation = Phaser.Math.degToRad(180);
@@ -56,28 +59,30 @@ export default class Carousel extends Phaser.Sprite {
         this.item = new Product(game, this.catalogue.getActiveProduct());
 
         // wrapper
-        this.addChild(background);
+        this.addChild(this.background);
         this.addChild(this.item);
         this.addChild(leftArrow);
         this.addChild(rightArrow);
 
         // background
-        background.beginFill(0x0000ff);
-        background.alpha = 0;
-        background.drawRect(0, 0, game.width / 1.5, game.height / 2);
+        this.background.beginFill(0x0000ff);
+        this.background.alpha = 0;
+        this.background.drawRect(0, 0, game.width, game.height / 2);
 
         // carousel positioning
-        this.x = game.world.centerX - (background.width / 2);
+        this.x = game.world.centerX - (this.background.width / 2);
         this.y = 25;
 
         // arrow positioning
-        leftArrow.y = (background.height / 2) - (leftArrow.height / 2);
-        leftArrow.x = leftArrow.width / 2;
-        rightArrow.y = leftArrow.y = (background.height / 2) - (rightArrow.height / 2);
-        rightArrow.x = background.width - rightArrow.width;
+        const arrowPadding = 80;
+
+        leftArrow.y = (this.background.height / 2) - (leftArrow.height / 2);
+        leftArrow.x = (leftArrow.width / 2) + arrowPadding;
+        rightArrow.y = (this.background.height / 2) - (rightArrow.height / 2);
+        rightArrow.x = (this.background.width - (rightArrow.width / 2)) - arrowPadding;
 
         // product positioning
-        this.item.x = (background.width / 2) - (this.item.getDimensions().width / 2);
+        this.item.x = (this.background.width / 2) - (this.item.getDimensions().width / 2);
         this.item.y = 16;
 
         // scale arrows up on keyDown

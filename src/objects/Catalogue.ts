@@ -38,8 +38,8 @@ export default class Catalogue extends Carousel {
         super.create(game);
 
         // price positioning
-        this.price.y = this.background.height - (this.price.height / 2);
-        this.price.x = (this.background.width / 2) - (this.price.width / 2);
+        this.price.y = this.background.height - (this.price.height / 2) + this.topPadding;
+        this.price.x = this.background.width / 2;
         this.price.wordWrapWidth = 500;
         this.price.anchor.setTo(0.5);
     }

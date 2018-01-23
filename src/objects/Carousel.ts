@@ -14,7 +14,8 @@ const sprites = {
 
 export default class Carousel extends Phaser.Sprite {
     protected background: Phaser.Graphics;
-    protected  catalogue: CatalogueService;
+    protected catalogue: CatalogueService;
+    protected topPadding: number;
     private item: Product;
 
     constructor (
@@ -69,6 +70,8 @@ export default class Carousel extends Phaser.Sprite {
         this.background.alpha = 0;
         this.background.drawRect(0, 0, game.width, game.height / 2);
 
+        this.topPadding = 32;
+
         // carousel positioning
         this.x = game.world.centerX - (this.background.width / 2);
         this.y = 0;
@@ -76,14 +79,14 @@ export default class Carousel extends Phaser.Sprite {
         // arrow positioning
         const arrowPadding = 80;
 
-        leftArrow.y = (this.background.height / 2) - (leftArrow.height / 2);
+        leftArrow.y = (this.background.height / 2) - (leftArrow.height / 2) + this.topPadding;
         leftArrow.x = (leftArrow.width / 2) + arrowPadding;
-        rightArrow.y = (this.background.height / 2) - (rightArrow.height / 2);
+        rightArrow.y = (this.background.height / 2) - (rightArrow.height / 2) + this.topPadding;
         rightArrow.x = (this.background.width - (rightArrow.width / 2)) - arrowPadding;
 
         // product positioning
         this.item.x = (this.background.width / 2) - (this.item.getDimensions().width / 2);
-        this.item.y = 16;
+        this.item.y = 16 + this.topPadding;
 
         // scale arrows up on keyDown
         game.input.keyboard.onDownCallback = () => {

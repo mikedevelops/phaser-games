@@ -69,3 +69,15 @@ const game = new Phaser.Game(
         state: bootState
     }
 );
+
+// Debug
+// const x = new Phaser.Graphics(game);
+// const y = new Phaser.Graphics(game);
+
+// x.beginFill(0xff0000);
+// y.beginFill(0xff0000);
+// x.drawRect(0, (game.height / 2), game.width, 2);
+// y.drawRect(game.width / 2, 0, 2, game.height);
+
+// game.add.existing(x);
+// game.add.existing(y);

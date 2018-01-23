@@ -15,6 +15,7 @@ export default class SpeechPane extends TextPane {
         game: Phaser.Game,
         private speech: string[],
         private speed: number = 50,
+        private next: () => void
     ) {
         super(game);
         // Speech Service
@@ -44,8 +45,11 @@ export default class SpeechPane extends TextPane {
         if (this.speechTimer >= this.speed) {
             const text = this.speechService.getText();
 
+            // text has finished
             if (text !== null) {
                 this.gameText.text = text;
+            } else {
+                this.next();
             }
 
             this.speechTimer = 0;

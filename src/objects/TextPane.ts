@@ -25,12 +25,13 @@ export default class TextPane extends Phaser.Sprite {
     constructor (
         game: Phaser.Game,
         text: string = '',
-        position: string = 'BOTTOM',
+        x: number = 0,
+        y: number = 0,
         width: number = (game.width / DEFAULT_RES),
         height: number = 5,
         res: number = DEFAULT_RES
     ) {
-        super(game, 0, 0, null);
+        super(game, x, y, null);
 
         this.paneWidth = width;
         this.paneHeight = height;
@@ -48,13 +49,6 @@ export default class TextPane extends Phaser.Sprite {
         this.gameText.wordWrapWidth = (this.paneWidth * this.res) - (this.res * 1.5);
         this.gameText.text = text;
 
-        // Position
-        switch (position) {
-            case 'BOTTOM':
-            default:
-                this.y = game.height - this.pane.getHeight();
-        }
-
         // Attach
         this.addChild(this.pane);
         this.addChild(this.gameText);
@@ -64,5 +58,21 @@ export default class TextPane extends Phaser.Sprite {
         text: string
     ): void {
         this.gameText.text = text;
+    }
+
+    public setPosition (
+        game: Phaser.Game,
+        position: 'TOP'|'BOTTOM'
+    ): void {
+        switch (position) {
+            case 'TOP':
+                this.x = 0;
+                this.y = 0;
+                break;
+            case 'BOTTOM':
+                this.x = 0;
+                this.y = game.height - (this.paneHeight * this.res);
+                break;
+        }
     }
 }

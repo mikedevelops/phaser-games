@@ -70,8 +70,4 @@ export default class Pane extends Phaser.Sprite {
         this.addChild(bottomLeftCorner);
         this.addChild(bottomRightCorner);
     }
-
-    public getHeight (): number {
-        return this.paneHeight;
-    }
 }

@@ -25,14 +25,19 @@ Todos
         - create catalogue data √
         - switch through items on input √
     - create catalogue from data (including hair) √
-    - have locked (hidden) items
-    - navigate through items on character
 
 10/1/2018
 
 - Prototype item selection
-    - print sprites and product info
-    - have locked (hidden) items
-    - buy action
+    - print catalogue information √
+
+23/1/2018
+
+- Prototype item selection
+    - product sprites √
+    - have locked (hidden) items √
+    - factor Item Selector into a class, we need a base item selector
+        that will take a catalogue interface for navigating items.
+        From this we can build a catalogue object for adding the desc pane.
 
 ---

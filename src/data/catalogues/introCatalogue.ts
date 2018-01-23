@@ -1,23 +1,23 @@
-import { Catalogue } from '../../interfaces/catalogue';
+import { CatalogueInterface } from '../../interfaces/catalogue';
 
-const introStoreCatalogue: Catalogue = {
+const introStoreCatalogue: CatalogueInterface = {
     name: 'Suits Plus',
-    products: [
+    items: [
         {
             id: 0,
             price: 40,
-            name: 'The Basic',
-            description: 'The everyday suit.',
-            sprite: 'suit_0',
+            name: 'The Penguin',
+            description: 'Stay classy.',
+            sprite: 'products 0.ase',
             locked: false
         },
         {
             id: 1,
             price: 5.99,
-            name: 'The Packet Shirt',
-            description: 'Fresh out of the packet.',
-            sprite: 'shirt_0',
-            locked: false
+            name: 'The Everyday',
+            description: 'The everyday suit, for everyday.',
+            sprite: 'products 0.ase',
+            locked: true
         }
     ]
 };

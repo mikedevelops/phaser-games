@@ -1,34 +1,40 @@
-import { Catalogue, Product } from '../interfaces/catalogue';
+import { CatalogueInterface, ProductInterface } from '../interfaces/catalogue';
 
 export default class CatalogueService {
     private activeProductIndex: number = 0;
 
     constructor (
-        private catalogue: Catalogue
+        private catalogue: CatalogueInterface
     ) {}
 
-    public getActiveProduct (): Product {
-        return this.catalogue.products[this.activeProductIndex];
+    public getActiveProduct (): ProductInterface {
+        return this.catalogue.items[this.activeProductIndex];
     }
 
-    public getNextItem (): Product {
-        if (this.activeProductIndex === this.catalogue.products.length - 1) {
+    public next (): void {
+        if (this.activeProductIndex === this.catalogue.items.length - 1) {
             this.activeProductIndex = 0;
         } else {
             this.activeProductIndex++;
         }
-
-        return this.catalogue.products[this.activeProductIndex];
     }
 
-    public getPrevItem (): Product {
+    public prev (): void {
         if (this.activeProductIndex === 0) {
-            this.activeProductIndex = this.catalogue.products.length - 1;
+            this.activeProductIndex = this.catalogue.items.length - 1;
         } else {
             this.activeProductIndex--;
         }
+    }
 
-        return this.catalogue.products[this.activeProductIndex];
+    public printActiveProduct (): string {
+        const { name, description, price } = this.catalogue.items[this.activeProductIndex];
+
+        return `${name}\n"${description}"`;
+    }
+
+    public printActiveProductPrice (): string {
+        return `$${this.catalogue.items[this.activeProductIndex].price}`;
     }
 
 }

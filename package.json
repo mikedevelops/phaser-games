@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server",
     "test": "jest",
     "prod": "webpack -p",
-    "start": "node server/index.js",
+    "start": "webpack-dev-server",
     "build:phaser": "cd node_modules/phaser && npm install && npm run build"
   },
   "keywords": [],

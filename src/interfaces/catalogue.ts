@@ -1,4 +1,6 @@
-export interface Product {
+import { ItemInterface, CarouselInterface } from './Carousel';
+
+export interface ProductInterface {
     id: number;
     price: number;
     name: string;
@@ -7,7 +9,7 @@ export interface Product {
     locked: boolean;
 }
 
-export interface Catalogue {
+export interface CatalogueInterface {
     name: string;
-    products: Product[];
+    items: ProductInterface[];
 }

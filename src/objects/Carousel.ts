@@ -71,7 +71,7 @@ export default class Carousel extends Phaser.Sprite {
 
         // carousel positioning
         this.x = game.world.centerX - (this.background.width / 2);
-        this.y = 25;
+        this.y = 0;
 
         // arrow positioning
         const arrowPadding = 80;

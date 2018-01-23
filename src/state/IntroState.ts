@@ -14,6 +14,9 @@ export default class IntroState extends Phaser.State {
     public create (
         game: Phaser.Game
     ) {
-        game.add.existing(new SpeechPane(game, introductionSpeech, 25));
+        const speechPane = new SpeechPane(game, introductionSpeech, 25);
+
+        speechPane.setPosition(game, 'BOTTOM');
+        game.add.existing(speechPane);
     }
 }

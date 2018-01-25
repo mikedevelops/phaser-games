@@ -1,7 +1,6 @@
 import 'p2';
 import 'pixi';
 import 'phaser';
-import Wallet from './objects/Wallet';
 import CurrencyService from './services/CurrencyService';
 import Ticker from './objects/Ticker';
 import { IGameConfig } from 'phaser-ce';
@@ -12,6 +11,10 @@ import IntroState from './state/IntroState';
 
 import '../assets/fonts/Commodore.ttf';
 import IntroStoreState from './state/IntroStoreState';
+import PlayerService from './services/PlayerService';
+import WalletService from './services/WalletService';
+import PlayerItemService from './services/PlayerItemService';
+import items from './data/items';
 
 // constants
 const TRADE_INTERVAL = 1;
@@ -42,6 +45,11 @@ const joshCoin: CurrencyService = new CurrencyService(
     1.50
 );
 
+// Player
+const wallet = new WalletService();
+const playerItems = new PlayerItemService(items);
+const player = new PlayerService(wallet, playerItems);
+
 // State
 const mainState = new MainState(
     CURRENCY,
@@ -49,7 +57,7 @@ const mainState = new MainState(
     FONT_STYLE
 );
 const introState = new IntroState();
-const introStoreState = new IntroStoreState();
+const introStoreState = new IntroStoreState(player);
 const titleState = new TitleState(
     FONT_STYLE
 );

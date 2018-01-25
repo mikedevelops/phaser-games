@@ -34,7 +34,9 @@ export default class CatalogueService {
     }
 
     public printActiveProductPrice (): string {
-        return `$${this.catalogue.items[this.activeProductIndex].price}`;
+        const { locked, price } = this.catalogue.items[this.activeProductIndex];
+
+        return `$${locked ? '???' : price.toFixed(2)}`;
     }
 
 }

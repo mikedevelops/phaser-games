@@ -1,6 +1,5 @@
 import CurrencyService from '../services/CurrencyService';
 import Ticker from '../objects/Ticker';
-import Wallet from '../objects/Wallet';
 import Pane from '../objects/Pane';
 
 export default class MainState extends Phaser.State {
@@ -35,22 +34,6 @@ export default class MainState extends Phaser.State {
         });
         this.tickerGroup.x = 10;
         this.tickerGroup.y = 10;
-
-        // Wallet
-        this.walletGroup = game.add.group();
-        this.walletGroup.add(
-            new Wallet(
-                game,
-                0,
-                0,
-                10000,
-                'BROKER ACCOUNT',
-                this.tradeCurrency,
-                this.fontStyle
-            )
-        );
-        this.walletGroup.x = (game.width - this.walletGroup.width) - 10;
-        this.walletGroup.y = 10;
 
         // Trading
         this.tradeUI = game.add.group();

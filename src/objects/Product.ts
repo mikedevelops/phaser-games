@@ -12,7 +12,6 @@ export default class Product extends Phaser.Sprite {
     constructor (
         game: Phaser.Game,
         product: ProductInterface,
-        private locked: boolean = true,
         x: number = 0,
         y: number = 0
     ) {
@@ -35,6 +34,6 @@ export default class Product extends Phaser.Sprite {
     }
 
     private getSpriteFrame (product: ProductInterface): string {
-        return this.locked ? sprites.LOCKED : product.sprite;
+        return product.locked ? sprites.LOCKED : product.sprite;
     }
 }

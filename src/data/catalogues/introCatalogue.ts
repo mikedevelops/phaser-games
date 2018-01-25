@@ -6,14 +6,14 @@ const introStoreCatalogue: CatalogueInterface = {
     products: [
         {
             id: 0,
-            price: 5.99,
+            price: 22.50,
             name: 'The Everyday',
             description: 'The everyday suit, for everyday.',
             sprite: 'products 0.ase'
         },
         {
             id: 1,
-            price: 40,
+            price: 100,
             name: 'The Penguin',
             description: 'Stay classy.',
             sprite: 'products 0.ase'

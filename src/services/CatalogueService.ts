@@ -39,10 +39,10 @@ export default class CatalogueService {
     }
 
     public printActiveProductPrice (): string {
-        const { locked } = this.catalogue.products[this.activeProductIndex];
+        const { locked, owned } = this.catalogue.products[this.activeProductIndex];
         const { price } = this.catalogue.products[this.activeProductIndex].product;
 
-        return `$${locked ? '???' : price.toFixed(2)}`;
+        return `$${locked ? '???' : price.toFixed(2)}${owned ? ' (OWNED)' : ''}`;
     }
 
 }

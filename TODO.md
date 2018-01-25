@@ -40,10 +40,16 @@ Todos
         that will take a catalogue interface for navigating items.
         From this we can build a catalogue object for adding the desc pane.
 
-24/1/2018
+25/1/2018
 
 - User
-    - User wallet
-    - Spend method
-    - Earn method
-    - wallet UI
+    - User wallet √
+    - Buy method √
+    - wallet UI √
+
+26/1/2018
+
+- Products
+    - Buy UI
+    - Think about the way product objects are passed around
+        the services

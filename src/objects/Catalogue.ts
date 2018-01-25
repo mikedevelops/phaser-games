@@ -9,9 +9,13 @@ export default class Catalogue extends Carousel {
 
     constructor (
         game: Phaser.Game,
-        catalogue: UserCatalogueInterface
+        private userCatalogue: UserCatalogueInterface
     ) {
-        super(game, catalogue);
+        super(game, userCatalogue);
+    }
+
+    public getCatalogueId (): string {
+        return this.userCatalogue.id;
     }
 
     public preload (

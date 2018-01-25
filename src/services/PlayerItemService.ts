@@ -36,4 +36,23 @@ export default class PlayerItemService {
     ): UserCatalogueInterface {
         return this.master.find((c: UserCatalogueInterface) => c.id === key);
     }
+
+    public purchase (
+        catalogueId: string,
+        product: UserProductInterface
+    ) {
+        // Create new immutable set of products
+        const newProducts = this.getItemsById(catalogueId).products.map((p: UserProductInterface) => {
+            if (p.product.id === product.product.id) {
+                return Object.assign({}, p, {
+                    owned: true
+                });
+            } else {
+                return p;
+            }
+        });
+
+        // update products
+        this.getItemsById(catalogueId).products = newProducts;
+    }
 }

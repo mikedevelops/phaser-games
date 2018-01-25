@@ -20,7 +20,6 @@ export default class IntroStoreState extends Phaser.State {
     ) {
         this.catalogue = new Catalogue(game, this.player.getItemsById('INTRO'));
         this.catalogue.preload(game);
-        this.wallet = new WalletService();
     }
 
     public create (
@@ -28,7 +27,7 @@ export default class IntroStoreState extends Phaser.State {
     ) {
         const balance = new GameText(game, 'foo');
 
-        balance.setText(`${this.wallet.getCurrency()}${this.wallet.getBalance().toFixed(2)}`);
+        balance.setText(this.player.printWalletBalance());
         balance.x = 10;
         balance.y = 10;
 
@@ -36,6 +35,22 @@ export default class IntroStoreState extends Phaser.State {
 
         this.catalogue.create(game);
         game.add.existing(this.catalogue);
+
+        // Buy item
+        game.input.keyboard.onDownCallback = () => {
+            this.catalogue.handleKeyDown(game);
+
+            switch (game.input.keyboard.event.keyCode) {
+                case Phaser.Keyboard.ENTER:
+                    this.player.buyProduct(this.catalogue.getCatalogueId(), this.catalogue.getActiveItem());
+                    balance.setText(this.player.printWalletBalance());
+                    break;
+            }
+        };
+
+        game.input.keyboard.onUpCallback = () => {
+            this.catalogue.handleKeyUp();
+        };
     }
 
     public update (

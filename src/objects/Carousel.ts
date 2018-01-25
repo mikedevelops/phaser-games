@@ -4,7 +4,7 @@ import '../../assets/sheets/catalogue/catalogue.png';
 import '../../assets/sheets/products/products@4x.json';
 import '../../assets/sheets/products/products@4x.png';
 import CatalogueService from '../services/CatalogueService';
-import { CatalogueInterface, UserCatalogueInterface } from '../interfaces/catalogue';
+import { CatalogueInterface, UserCatalogueInterface, UserProductInterface } from '../interfaces/catalogue';
 import Product from './Product';
 import GameText from './GameText';
 
@@ -16,6 +16,8 @@ export default class Carousel extends Phaser.Sprite {
     protected background: Phaser.Graphics;
     protected catalogue: CatalogueService;
     protected topPadding: number;
+    private rightArrow: Phaser.Sprite;
+    private leftArrow: Phaser.Sprite;
     private item: Product;
 
     constructor (
@@ -43,18 +45,18 @@ export default class Carousel extends Phaser.Sprite {
         game: Phaser.Game
     ) {
         // arrows
-        const leftArrow = new Phaser.Sprite(game, 0, 0, 'catalogue', sprites.ARROW);
-        const rightArrow = new Phaser.Sprite(game, 0, 0, 'catalogue', sprites.ARROW);
+        this.leftArrow = new Phaser.Sprite(game, 0, 0, 'catalogue', sprites.ARROW);
+        this.rightArrow = new Phaser.Sprite(game, 0, 0, 'catalogue', sprites.ARROW);
 
         // background
         this.background = new Phaser.Graphics(game, 0, 0);
 
         // create left arrow from right arrow sprite
-        leftArrow.rotation = Phaser.Math.degToRad(180);
+        this.leftArrow.rotation = Phaser.Math.degToRad(180);
 
         // set anchors for scaling from the center
-        leftArrow.anchor.setTo(0.5);
-        rightArrow.anchor.setTo(0.5);
+        this.leftArrow.anchor.setTo(0.5);
+        this.rightArrow.anchor.setTo(0.5);
 
         // product
         this.item = new Product(game, this.catalogue.getActiveProduct());
@@ -62,8 +64,8 @@ export default class Carousel extends Phaser.Sprite {
         // wrapper
         this.addChild(this.background);
         this.addChild(this.item);
-        this.addChild(leftArrow);
-        this.addChild(rightArrow);
+        this.addChild(this.leftArrow);
+        this.addChild(this.rightArrow);
 
         // background
         this.background.beginFill(0x0000ff);
@@ -79,35 +81,39 @@ export default class Carousel extends Phaser.Sprite {
         // arrow positioning
         const arrowPadding = 60;
 
-        leftArrow.y = (this.background.height / 2) - (leftArrow.height / 2) + this.topPadding;
-        leftArrow.x = (leftArrow.width / 2) + arrowPadding;
-        rightArrow.y = (this.background.height / 2) - (rightArrow.height / 2) + this.topPadding;
-        rightArrow.x = (this.background.width - (rightArrow.width / 2)) - arrowPadding;
+        this.leftArrow.y = (this.background.height / 2) - (this.leftArrow.height / 2) + this.topPadding;
+        this.leftArrow.x = (this.leftArrow.width / 2) + arrowPadding;
+        this.rightArrow.y = (this.background.height / 2) - (this.rightArrow.height / 2) + this.topPadding;
+        this.rightArrow.x = (this.background.width - (this.rightArrow.width / 2)) - arrowPadding;
 
         // product positioning
         this.item.x = (this.background.width / 2) - (this.item.getDimensions().width / 2);
         this.item.y = 16 + this.topPadding;
+    }
 
-        // scale arrows up on keyDown
-        game.input.keyboard.onDownCallback = () => {
-            switch (game.input.keyboard.event.keyCode) {
-                case Phaser.Keyboard.LEFT:
-                    leftArrow.scale.setTo(this.arrowScale);
-                    this.catalogue.prev();
-                    break;
-                case Phaser.Keyboard.RIGHT:
-                    rightArrow.scale.setTo(this.arrowScale);
-                    this.catalogue.next();
-                    break;
-                }
+    public handleKeyDown (
+        game: Phaser.Game
+    ) {
+        switch (game.input.keyboard.event.keyCode) {
+            case Phaser.Keyboard.LEFT:
+                this.leftArrow.scale.setTo(this.arrowScale);
+                this.catalogue.prev();
+                break;
+            case Phaser.Keyboard.RIGHT:
+                this.rightArrow.scale.setTo(this.arrowScale);
+                this.catalogue.next();
+                break;
+            }
 
-            this.item.updateProduct(this.catalogue.getActiveProduct());
-        };
+        this.item.updateProduct(this.catalogue.getActiveProduct());
+    }
 
-        // revert arrow scaling on keyUp
-        game.input.keyboard.onUpCallback = () => {
-            leftArrow.scale.setTo(1);
-            rightArrow.scale.setTo(1);
-        };
+    public handleKeyUp () {
+        this.leftArrow.scale.setTo(1);
+        this.rightArrow.scale.setTo(1);
+    }
+
+    public getActiveItem (): UserProductInterface {
+        return this.catalogue.getActiveProduct();
     }
 }

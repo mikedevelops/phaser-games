@@ -23,4 +23,8 @@ export default class WalletService {
     ): number {
         return this.balance -= amount;
     }
+
+    public printBalance (): string {
+        return `${this.currency}${this.balance.toFixed(2)}`;
+    }
 }

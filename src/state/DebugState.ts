@@ -1,4 +1,6 @@
 import 'phaser-ce';
+import GameText from '../objects/GameText';
+import WalletService from '../services/WalletService';
 
 export default class DebugState extends Phaser.State {
     public preload (

@@ -100,6 +100,8 @@ export default class Carousel extends Phaser.Sprite {
                     this.catalogue.next();
                     break;
                 }
+
+            this.item.updateProduct(this.catalogue.getActiveProduct());
         };
 
         // revert arrow scaling on keyUp
@@ -107,10 +109,5 @@ export default class Carousel extends Phaser.Sprite {
             leftArrow.scale.setTo(1);
             rightArrow.scale.setTo(1);
         };
-    }
-
-    public update () {
-        // update active product
-        this.item.updateProduct(this.catalogue.getActiveProduct());
     }
 }

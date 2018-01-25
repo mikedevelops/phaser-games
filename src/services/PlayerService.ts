@@ -1,6 +1,6 @@
 import WalletService from './WalletService';
 import PlayerItemService from './PlayerItemService';
-import { CatalogueInterface } from '../interfaces/catalogue';
+import { CatalogueInterface, UserCatalogueInterface } from '../interfaces/catalogue';
 
 export default class PlayerService {
     constructor (
@@ -11,7 +11,7 @@ export default class PlayerService {
 
     public getItemsById (
         key: string
-    ): CatalogueInterface {
+    ): UserCatalogueInterface {
         return this.items.getItemsById(key);
     }
 }

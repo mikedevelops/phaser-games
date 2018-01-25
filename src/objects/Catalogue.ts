@@ -1,5 +1,5 @@
 import Carousel from './Carousel';
-import { CatalogueInterface } from '../interfaces/catalogue';
+import { CatalogueInterface, UserCatalogueInterface } from '../interfaces/catalogue';
 import GameText from './GameText';
 import TextPane from './TextPane';
 
@@ -9,7 +9,7 @@ export default class Catalogue extends Carousel {
 
     constructor (
         game: Phaser.Game,
-        catalogue: CatalogueInterface
+        catalogue: UserCatalogueInterface
     ) {
         super(game, catalogue);
     }

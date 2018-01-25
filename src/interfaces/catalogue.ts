@@ -6,11 +6,22 @@ export interface ProductInterface {
     name: string;
     description: string;
     sprite: string;
-    locked: boolean;
 }
 
 export interface CatalogueInterface {
     id: string;
     name: string;
-    items: ProductInterface[];
+    products: ProductInterface[];
+}
+
+export interface UserCatalogueInterface {
+    id: string;
+    name: string;
+    products: UserProductInterface[];
+}
+
+export interface UserProductInterface {
+    product: ProductInterface;
+    locked: boolean;
+    owned: boolean;
 }

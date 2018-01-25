@@ -1,5 +1,5 @@
 import 'phaser-ce';
-import { ProductInterface } from '../interfaces/catalogue';
+import { UserProductInterface } from '../interfaces/catalogue';
 import GameText from './GameText';
 
 const sprites = {
@@ -11,7 +11,7 @@ export default class Product extends Phaser.Sprite {
 
     constructor (
         game: Phaser.Game,
-        product: ProductInterface,
+        product: UserProductInterface,
         x: number = 0,
         y: number = 0
     ) {
@@ -29,11 +29,11 @@ export default class Product extends Phaser.Sprite {
         };
     }
 
-    public updateProduct (product: ProductInterface) {
+    public updateProduct (product: UserProductInterface) {
         this.sprite.frameName = this.getSpriteFrame(product);
     }
 
-    private getSpriteFrame (product: ProductInterface): string {
-        return product.locked ? sprites.LOCKED : product.sprite;
+    private getSpriteFrame (product: UserProductInterface): string {
+        return product.locked ? sprites.LOCKED : product.product.sprite;
     }
 }

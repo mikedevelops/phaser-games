@@ -4,7 +4,7 @@ import '../../assets/sheets/catalogue/catalogue.png';
 import '../../assets/sheets/products/products@4x.json';
 import '../../assets/sheets/products/products@4x.png';
 import CatalogueService from '../services/CatalogueService';
-import { CatalogueInterface } from '../interfaces/catalogue';
+import { CatalogueInterface, UserCatalogueInterface } from '../interfaces/catalogue';
 import Product from './Product';
 import GameText from './GameText';
 
@@ -20,7 +20,7 @@ export default class Carousel extends Phaser.Sprite {
 
     constructor (
         game: Phaser.Game,
-        items: CatalogueInterface,
+        items: UserCatalogueInterface,
         private arrowScale: number = 1.5,
         width: number = game.width / 1.5,
         x: number = 0,

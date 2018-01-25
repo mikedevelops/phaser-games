@@ -10,6 +10,7 @@ export interface ProductInterface {
 }
 
 export interface CatalogueInterface {
+    id: string;
     name: string;
     items: ProductInterface[];
 }
